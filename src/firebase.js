@@ -1,14 +1,7 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth , signInWithPhoneNumber} from "firebase/auth";
-import {getFirestore}from 'firebase/firestore'
-import 'firebase/auth';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// firebaseConfig.js
+import firebase from "firebase/app";
+import "firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyA25i6aDl8l7QHhO2bRSeRMan-5z3RhKa8",
   authDomain: "chatting-app-81499.firebaseapp.com",
@@ -20,9 +13,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export default app;
-const auth = getAuth(app);
-const analytics = getAnalytics(app);
-const db = getFirestore(app); // Initialize Firestore
-export { auth, db, analytics,signInWithPhoneNumber };
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+const firestore = firebase.firestore();
+
+export { firestore, firebase as default };
